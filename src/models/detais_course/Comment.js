@@ -5,7 +5,7 @@ const CommentSchema = new Schema(
   {
     courseId: { type: Schema.Types.ObjectId, ref: 'Course' },
     content: { type: String, required: true },
-    userId: { type: Schema.Types.ObjectId, refPath: 'onModel' },
+    userId: { type: Schema.Types.ObjectId, ref: 'Account' },
     parentId: { type: Schema.Types.ObjectId, ref: 'Comment' },
   },
   { timestamps: true }

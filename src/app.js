@@ -10,6 +10,7 @@ const db = require('../config/db');
 // const indexRouter = require('./routes/index');
 // const usersRouter = require('./routes/users');
 const courseRouter = require('./routes/course');
+const lectureRouter = require('./routes/lecture');
 
 dotenv.config()
 db.connect()
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 app.use('/courses', courseRouter);
+app.use('/lectures', lectureRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

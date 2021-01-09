@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
-router.route('/')
-  .get(function(req, res, next){
-    res.status(200).json({message: 'Test thu phat'})
-  })
+const courseController = require('../controllers/course.controller')
 
+router.route('/')
+  .get(courseController.index)
+  .post(courseController.createCourse)
 
 module.exports = router
