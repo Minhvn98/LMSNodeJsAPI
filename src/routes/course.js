@@ -1,10 +1,12 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
-const courseController = require('../controllers/course.controller')
+const { validateCourse } = require('../validators/course.validator');
+const courseController = require('../controllers/course.controller');
 
-router.route('/')
+router
+  .route('/')
   .get(courseController.index)
-  .post(courseController.createCourse)
+  .post(validateCourse(), courseController.createCourse);
 
-module.exports = router
+module.exports = router;

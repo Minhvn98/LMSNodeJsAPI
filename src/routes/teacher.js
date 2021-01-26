@@ -1,6 +1,7 @@
 const router = require('express-promise-router')();
 
 const teacherController = require('../controllers/teacher.controller');
+const upload = require('../helpers/upload-file.helper');
 const {
   schema,
   validateBody,
@@ -15,7 +16,21 @@ router
 router
   .route('/:id')
   .get(validateId(schema.idSchema), teacherController.getTeacher)
-  .put(validateId(schema.idSchema), validateBody(schema.userSchema), teacherController.updateTeacher)
-  .patch(validateId(schema.idSchema), validateBody(schema.userSchema), teacherController.updateTeacher)
+  .put(
+    upload.single('avatar'),
+    validateId(schema.idSchema),
+    validateBody(schema.userSchema),
+    teacherController.updateTeacher
+  )
+  .patch(
+    upload.single('avatar'),
+    validateId(schema.idSchema),
+    validateBody(schema.userSchema),
+    teacherController.updateTeacher
+  )
+  .delete(
+    validateId(schema.idSchema),
+    teacherController.deleteTeacher
+  )
 
 module.exports = router;

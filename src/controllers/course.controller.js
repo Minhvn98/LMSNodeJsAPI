@@ -4,6 +4,8 @@ const Document = require('../models/detais_course/Document')
 const Homework = require('../models/detais_course/Homework')
 const Lesson = require('../models/detais_course/Lesson')
 
+
+//[GET] /courses
 const index = function (req, res, next) {
   Course.find({})
     .populate('comments')
@@ -14,6 +16,7 @@ const index = function (req, res, next) {
     .catch(err => next(err))
 }
 
+//[POST] /courses
 const createCourse = function(req, res, next) {
   res.status(200).json(req.body)
 }

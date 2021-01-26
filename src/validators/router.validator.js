@@ -8,7 +8,7 @@ const validateBody = function (schema) {
 
     if (!req.value) req.value = {};
     if (!req.value.body) req.value.body = validationResult.value;
-
+    return res.json(req.value.body)
     next();
   };
 };
@@ -33,7 +33,7 @@ const schema = {
   userSchema: Joi.object().keys({
     email: Joi.string().email().required(),
     name: Joi.string().min(2).required(),
-    password: Joi.string().min(8).required(),
+    password: Joi.string().min(8),
     phone: Joi.string().min(10),
     role: Joi.number().min(0).max(2).required(),
   }),
