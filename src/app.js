@@ -7,8 +7,8 @@ const logger = require('morgan');
 
 const db = require('../config/db');
 
-const courseRouter = require('./routes/course');
-const teacherRouter = require('./routes/teacher');
+const courseRouter = require('./routes/course.route');
+const teacherRouter = require('./routes/teacher.route');
 
 dotenv.config();
 db.connect();

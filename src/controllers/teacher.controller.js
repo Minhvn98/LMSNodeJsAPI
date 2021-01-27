@@ -31,9 +31,7 @@ const deleteTeacher = async function (req, res, next) {
 
   if (!teacher)
     return res.status(400).json({
-      error: {
-        message: 'Teacher not found!',
-      },
+      message: 'Teacher not found!',
     });
 
   res.status(200).json({
