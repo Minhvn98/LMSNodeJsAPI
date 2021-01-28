@@ -48,7 +48,11 @@ const deleteCourse = async function (req, res, next) {
 
 //[GET] /courses/:id
 const getCourse = async function (req, res, next) {
-  const course = await Course.findById(req.value.id);
+  const course = await Course.findById(req.value.id)
+    .populate('lessons')
+    .populate('homeworks')
+    .populate('documents')
+    .populate('comments');
 
   if (!course)
     return res.status(400).json({

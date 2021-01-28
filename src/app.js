@@ -9,6 +9,7 @@ const db = require('../config/db');
 
 const courseRouter = require('./routes/course.route');
 const teacherRouter = require('./routes/teacher.route');
+const lessonRouter = require('./routes/lesson.route');
 
 dotenv.config();
 db.connect();
@@ -26,9 +27,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/users', usersRouter);
+// App routing
 app.use('/courses', courseRouter);
 app.use('/teachers', teacherRouter);
+app.use('/lessons', lessonRouter);
 
 // app.use('/', (req, res, next) => {
 //   return res.status(200).json({
