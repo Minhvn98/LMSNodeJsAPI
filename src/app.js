@@ -10,6 +10,8 @@ const db = require('../config/db');
 const courseRouter = require('./routes/course.route');
 const teacherRouter = require('./routes/teacher.route');
 const lessonRouter = require('./routes/lesson.route');
+const documentRouter = require('./routes/document.route');
+const homeworkRouter = require('./routes/homework.route');
 
 dotenv.config();
 db.connect();
@@ -31,12 +33,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/courses', courseRouter);
 app.use('/teachers', teacherRouter);
 app.use('/lessons', lessonRouter);
+app.use('/documents', documentRouter);
+app.use('/homeworks', homeworkRouter);
 
-// app.use('/', (req, res, next) => {
-//   return res.status(200).json({
-//     message: 'OK'
-//   })
-// });
+app.use('/', (req, res, next) => {
+  return res.status(200).json({
+    message: 'OK',
+  });
+});
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

@@ -28,9 +28,6 @@ router
     validateBody(schema.userSchema),
     teacherController.updateTeacher
   )
-  .delete(
-    validateId(schema.idSchema),
-    teacherController.deleteTeacher
-  )
+  .delete(validateId(schema.idSchema), teacherController.deleteTeacher);
 
 module.exports = router;

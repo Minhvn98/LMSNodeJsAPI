@@ -1,7 +1,7 @@
 const router = require('express-promise-router')();
 
 const upload = require('../helpers/upload-file.helper');
-const lessonController = require('../controllers/lesson.controller');
+const documentController = require('../controllers/document.controller');
 const {
   validateDetailCourse,
 } = require('../validators/course-detail.validator');
@@ -9,28 +9,28 @@ const { schema, validateId } = require('../validators/router.validator');
 
 router
   .route('/')
-  .get(lessonController.index)
+  .get(documentController.index)
   .post(
     upload.single('file'),
     validateDetailCourse(),
-    lessonController.createLesson
+    documentController.createDocument
   );
 
 router
   .route('/:id')
-  .get(validateId(schema.idSchema), lessonController.getLesson)
+  .get(validateId(schema.idSchema), documentController.getDocument)
   .put(
     upload.single('file'),
     validateId(schema.idSchema),
     validateDetailCourse(),
-    lessonController.replaceLesson
+    documentController.replaceDocument
   )
   .patch(
     upload.single('file'),
     validateId(schema.idSchema),
     validateDetailCourse(),
-    lessonController.updateLesson
+    documentController.updateDocument
   )
-  .delete(validateId(schema.idSchema), lessonController.deleteLesson);
+  .delete(validateId(schema.idSchema), documentController.deleteDocument);
 
 module.exports = router;

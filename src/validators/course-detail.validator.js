@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const schema = Joi.object().keys({
-  title: Joi.string().trim().min(10).required(),
+  title: Joi.string().trim().min(5).required(),
   course: Joi.string()
     .trim()
     .regex(/^[A-Fa-f-0-9]{24}$/),

@@ -49,11 +49,9 @@ const index = async function (req, res, next) {
 const replaceLesson = async function (req, res, next) {
   const lessonId = req.value.id;
   const file = req.file;
-
   if (file) req.value.body.filePath = file.path.split('public')[1];
 
   await Lesson.findByIdAndUpdate(lessonId, req.value.body);
-
   res.status(200).json({ success: true });
 };
 
