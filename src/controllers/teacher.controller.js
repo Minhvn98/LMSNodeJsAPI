@@ -1,15 +1,15 @@
-const Account = require('../models/Account');
+const User = require('../models/User');
 
 //[GET] /teachers
 const index = function (req, res, next) {
-  Account.find({ role: 1 })
+  User.find({ role: 1 })
     .then((lectures) => res.status(200).json(lectures))
     .catch((err) => next(err));
 };
 
 //[POST] /teachers
 const createTeacher = async function (req, res, next) {
-  const teacher = await Account.findOne({ email: req.body.email });
+  const teacher = await User.findOne({ email: req.body.email });
   // check email
   if (teacher)
     return res.status(403).json({
@@ -18,7 +18,7 @@ const createTeacher = async function (req, res, next) {
       },
     });
 
-  const newTeacher = await new Account(req.value.body);
+  const newTeacher = await new User(req.value.body);
   await newTeacher.save();
   res.status(201).json({
     teacher: newTeacher,
@@ -27,7 +27,7 @@ const createTeacher = async function (req, res, next) {
 
 //[DELETE] /teachers/:id
 const deleteTeacher = async function (req, res, next) {
-  const teacher = await Account.findById(req.value.id);
+  const teacher = await User.findById(req.value.id);
 
   if (!teacher)
     return res.status(400).json({
@@ -41,7 +41,7 @@ const deleteTeacher = async function (req, res, next) {
 
 //[GET] /teachers/:id
 const getTeacher = async function (req, res, next) {
-  const teacher = await Account.findById(req.value.id);
+  const teacher = await User.findById(req.value.id);
   res.status(200).json(teacher);
 };
 
@@ -52,7 +52,7 @@ const repalceTeacher = async function (req, res, next) {
     req.value.body.avatar = fileAvatar.path.split('public')[1];
   }
 
-  const teacher = await Account.findByIdAndUpdate(req.value.id, req.value.body);
+  const teacher = await User.findByIdAndUpdate(req.value.id, req.value.body);
 
   if (!teacher)
     return res.status(400).json({
@@ -71,7 +71,7 @@ const updateTeacher = async function (req, res, next) {
     req.value.body.avatar = fileAvatar.path.split('public')[1];
   }
 
-  const teacher = await Account.findByIdAndUpdate(req.value.id, req.value.body);
+  const teacher = await User.findByIdAndUpdate(req.value.id, req.value.body);
 
   if (!teacher)
     return res.status(400).json({

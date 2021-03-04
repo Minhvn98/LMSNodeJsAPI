@@ -1,4 +1,4 @@
-const Account = require('../models/Account');
+const User = require('../models/User');
 const Course = require('../models/Course');
 const Comment = require('../models/detais_course/Comment');
 const Document = require('../models/detais_course/Document');
@@ -25,7 +25,7 @@ const createCourse = async function (req, res, next) {
   const course = new Course(req.value.body);
   course.save();
 
-  const teacher = await Account.findById(course.teacher);
+  const teacher = await User.findById(course.teacher);
   teacher.courses.push(course.id);
   teacher.save();
 
@@ -39,7 +39,7 @@ const deleteCourse = async function (req, res, next) {
   const course = await Course.findById(courseId);
   await course.remove();
 
-  const teacher = await Account.findById(course.teacher);
+  const teacher = await User.findById(course.teacher);
   teacher.courses.pull(course._id);
   await teacher.save();
 

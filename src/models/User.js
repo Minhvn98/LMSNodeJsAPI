@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const AccountSchema = new Schema(
+const UserSchema = new Schema(
   {
     avatar: { type: String, default: '/images/avatar.jpg' },
     courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
@@ -15,7 +15,7 @@ const AccountSchema = new Schema(
   { timestamps: true }
 );
 
-AccountSchema.pre('save', async function (next) {
+UserSchema.pre('save', async function (next) {
   try {
     const salt = await bcrypt.genSalt(10);
     const passwordHashed = await bcrypt.hash(this.password, salt);
@@ -25,4 +25,4 @@ AccountSchema.pre('save', async function (next) {
   }
 });
 
-module.exports = mongoose.model('Account', AccountSchema);
+module.exports = mongoose.model('User', UserSchema);
